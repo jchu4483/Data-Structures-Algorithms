@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define MAX 10
+#define MAX 125
 
 void push(int num);
 void pop();
@@ -9,53 +9,15 @@ void printStack();
 bool isFull();
 bool isEmpty();
 void printTopElement();
+void primeFactors(int num);
+void printBinary(int num);
 
 int stack[MAX];
 int top = -1;
 
 int main() {
-    int choice, data;
-    while (1) {
-        printf("\n");
-        printf("1. Push\n");
-        printf("2. Pop\n");
-        printf("3. Print the top element\n");
-        printf("4. Print all the elements in the stack\n");
-        printf("5. Quit\n");
-        printf("Please enter your choice: \n");
-        printf("\n");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                printf("Enter the element to be pushed: ");
-                scanf("%d", &data);
-                push(data);
-            break;
-
-            case 2:
-                pop();
-            break;
-
-            case 3:
-                printTopElement();
-            break;
-
-            case 4:
-                printStack();
-            break;
-
-            case 5:
-                exit(1);
-            break;
-
-            default:
-                printf("Wrong choice, please enter a choice between 1 - 5\n");
-            break;
-        }
-    }
-
-
+    printBinary(77);
+    printStack();
     return 0;
 }
 
@@ -101,4 +63,23 @@ bool isEmpty() {
 
 void printTopElement() {
     printf("Top element is: %i\n", stack[top]);
+}
+
+void primeFactors(int num) {
+    int i = 2;
+    while (num != 1) {
+        while (num % i == 0) {
+            push(i);
+            num = num / i;
+        }
+        i++;
+    }
+}
+
+void printBinary(int num) {
+    while (num != 0) {
+        int remainder = num % 2;
+        push(remainder);
+        num = num / 2;
+    }
 }
